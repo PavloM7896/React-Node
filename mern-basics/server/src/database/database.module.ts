@@ -1,14 +1,17 @@
 import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 
 let memoryServer: MongoMemoryServer;
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),  // Loads .env file
     MongooseModule.forRootAsync({
-      useFactory: async (): Promise<MongooseModuleOptions> => {
-        const uriFromEnv = process.env.MONGODB_URI;
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService): Promise<MongooseModuleOptions> => {
+        const uriFromEnv = configService.get<string>('MONGODB_URI');
         const uri = uriFromEnv ? uriFromEnv.trim() : '';
         let finalUri = uri;
 
