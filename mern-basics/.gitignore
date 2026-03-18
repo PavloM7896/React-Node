@@ -8,7 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+server/dist
+build
+.env
+.env.local
+.env.*.local
+coverage
+.nyc_output
 dist-ssr
 *.local
 

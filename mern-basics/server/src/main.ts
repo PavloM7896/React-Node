@@ -4,15 +4,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:5180',
-    ...(process.env.CLIENT_URL ? [process.env.CLIENT_URL] : []),
-  ];
-
   app.enableCors({
-    origin: process.env.NODE_ENV === 'production' ? allowedOrigins : true,
+    origin: true,
     credentials: true,
   });
 

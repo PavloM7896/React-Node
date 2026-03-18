@@ -5,7 +5,8 @@ import TodoHeader from "../components/TodoHeader.jsx";
 import TodoList from "../components/TodoList.jsx";
 import TodoFilters from "../components/TodoFilters.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : "/api";
+const ENV_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = ENV_URL.endsWith("/api") ? ENV_URL : `${ENV_URL}/api`;
 
 function TodosPage() {
   const [todos, setTodos] = useState([]);
