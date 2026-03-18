@@ -1,0 +1,40 @@
+
+ {
+     "version": "0.2.0",
+     "configurations": [
+         {
+            "name": "Frontend (Chrome)",
+             "type": "chrome",
+             "request": "launch",
+            "url": "http://127.0.0.1:5180",
+            "webRoot": "${workspaceFolder}/mern-basics/client/src",
+            "sourceMapPathOverrides": {
+                "/@vite/*": "${webRoot}/*",
+                "/src/*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "Backend (Node)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/mern-basics/server/src/index.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Attach to Backend",
+            "type": "node",
+            "request": "attach",
+            "port": 5050,
+            "skipFiles": ["<node_internals>/**"]
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Full Stack",
+            "configurations": ["Backend (Node)", "Frontend (Chrome)"],
+            "stopOnEntry": false
+         }
+     ]
+ }
